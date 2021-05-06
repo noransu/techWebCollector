@@ -3,17 +3,7 @@ import { defineStore } from 'pinia'
 interface HomeState {
   links: LinkConfig[],
   filteredLink: LinkConfig[],
-  // colorSet: string[]
 }
-
-// enum ColorEnum {
-//   ORANGE = '#fee4cb',
-//   LIGHT_PURPLE = '#e9e7fd',
-//   LIGHT_BLUE = '#dbf6fd',
-//   PINK = '#ffd3e2',
-//   LIGHT_GREEN = '#c8f7dc',
-//   BLUE = '#d5deff',
-// }
 
 interface LinkConfig {
   name: string,
@@ -760,14 +750,6 @@ export const useHomeStore = defineStore({
   id: 'app',
   state: (): HomeState => ({
     links: linkSet,
-    // colorSet: [
-    //   ColorEnum.ORANGE,
-    //   ColorEnum.LIGHT_PURPLE,
-    //   ColorEnum.LIGHT_BLUE,
-    //   ColorEnum.PINK,
-    //   ColorEnum.LIGHT_GREEN,
-    //   ColorEnum.BLUE,
-    // ]
     filteredLink: []
   }),
   getters: {
@@ -777,9 +759,6 @@ export const useHomeStore = defineStore({
     getFirstLevelLinks() {
       return this.links
     }
-    // getColorSet() {
-    //   return this.colorSet
-    // }
   },
   actions: {
     filterLinks(word: string) {

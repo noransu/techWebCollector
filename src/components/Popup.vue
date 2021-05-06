@@ -3,7 +3,7 @@
     <div class="font-sans font-semibold mt-2 text-2xl px-4 py-2">Detail</div>
     <div class="w-full h-11/12 px-10 py-3 overflow-auto">
       <div @click="handleClickContent(item)"
-      class="flex flex-wrap justify-start items-center mt-2 border-1 p-2 border-white rounded-full bg-gray-700"
+      class="cursor-pointer flex flex-wrap justify-start items-center mt-2 border-1 p-2 border-white rounded-full bg-gray-700"
       v-for="item in popupContent" :key="item.name">
         <img class="w-5 h-5 rounded-full mr-3 object-contain"
         :src="item.icon || 'https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/image.37s3g1ke2hs0.png'"/>

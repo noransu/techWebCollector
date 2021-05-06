@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-// import '@/assets/tailwind.css';
+import '@/assets/css/index.css'
 
 import { setupStore } from '@/store'
 import App from './App/App.vue';

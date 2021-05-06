@@ -1,8 +1,8 @@
 <template>
 <!-- w-full h-screen -->
-  <div class="flex mx-auto flex-col justify-start bg-primary p-3 min-w-xl min-h-3xl">
+  <div class="flex mx-auto flex-col justify-start bg-primary p-3 min-w-sm min-h-3xl">
     <van-sticky class="w-full">
-      <div class="w-full flex justify-start py-2 box-border z-100">
+      <div class="w-full flex justify-start py-2 box-border z-100 bg-white">
         <div class="flex w-full">
           <div class="shadow-md flex justify-between w-5/6 px-3 mr-3 rounded-full bg-white p-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
@@ -18,7 +18,7 @@
                   placeholder="Search"/>
           </div>
           <!-- eslint-disable-next-line max-len -->
-          <div class="bg-gray-700 rounded-full w-18 flex justify-center items-center text-white font-semibold">
+          <div class="cursor-pointer bg-gray-700 rounded-full w-18 flex justify-center items-center text-white font-semibold">
             <span v-if="!isFocus" @click.stop="onInput">搜索</span>
             <span v-else @click.stop="onCancel">取消</span>
           </div>
@@ -57,7 +57,7 @@ import Popup from '@/components/Popup.vue'
 import Card from '@/components/Card.vue'
 import SearchPanel from '@/components/SearchPanel.vue'
 import { HISTORY_VIEW } from '@/utils/constant'
-import { tabAction } from '@/utils/chromeActions'
+import { tabAction, getStorageItem } from '@/utils/chromeActions'
 
 export default defineComponent({
   name: 'App',
@@ -86,18 +86,19 @@ export default defineComponent({
       homeStore.filterLinks(filterWord.value)
     }
 
-    function focusInput() {
-      const record = localStorage.getItem(HISTORY_VIEW)
-      if (!record) {
+    async function focusInput() {
+      const record: any = await getStorageItem(HISTORY_VIEW)
+      if (Object.keys(record).length === 0) {
         historyRecord.value = []
       } else {
-        historyRecord.value = JSON.parse(record)
+        historyRecord.value = JSON.parse(record[HISTORY_VIEW])
       }
       isFocus.value = true
     }
 
     function onCancel() {
       filterWord.value = ''
+      homeStore.filterLinks('')
       isFocus.value = false
     }
 

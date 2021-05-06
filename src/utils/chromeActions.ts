@@ -19,3 +19,15 @@ export function tabAction(link: string) {
     })
   })
 }
+
+export function setStorageItem(action: string, value: string) {
+  chrome.runtime.sendMessage({ action: action, data: value })
+}
+
+export function getStorageItem(key: string) {
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(key, res => {
+      resolve(res)
+    })
+  })
+}

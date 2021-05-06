@@ -1,11 +1,11 @@
 <template>
 <!-- :style="{backgroundColor: cardColor}" -->
-  <div @click.stop="toggleShowDetail" class="w-full min-h-2 mt-3 rounded-3xl flex flex-col transition-all duration-500 bg-gray-700">
+  <div @click.stop="toggleShowDetail" class="cursor-pointer w-full min-h-2 mt-3 rounded-3xl flex flex-col transition-all duration-500 bg-gray-700">
     <div class="flex justify-start items-center">
       <div class="icon-wrap h-12 w-12 rounded-full flex justify-center items-center">
         <div class="bg-white w-8 h-8 rounded-full pr-5"></div>
       </div>
-      <p class="text-2xl font-bold text-white">{{cardTitle}}</p>
+      <p class="text-lg font-bold text-white">{{cardTitle}}</p>
     </div>
     <div class="flex flex-wrap justify-between px-6 mb-4" v-if="showChild">
       <div v-for="child in cardChild" :key="child.name" @click.stop="handleClickContent(child)" class="flex justify-start items-center items-center w-full bg-white rounded-full mt-2 px-2">

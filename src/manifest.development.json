@@ -1,11 +1,42 @@
 {
     "manifest_version": 2,
-    "name": "test",
-    "description": "test",
+    "name": "TechWebCollector",
+    "description": "a tech",
     "version": "0.0.1",
-    "options_page": "options.html",
+    "icons": {
+        "16": "logo.png",
+        "32": "logo.png",
+        "48": "logo.png",
+        "64": "logo.png"
+    },
     "browser_action": {
         "default_popup": "popup.html"
     },
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*",
+                "file://*"
+            ],
+            "js": [
+                "js/content.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true,
+            "match_about_blank": true
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "storage",
+        "http://*/",
+        "https://*/"
+    ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
