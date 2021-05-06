@@ -14,11 +14,18 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "chrome"
     ],
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "#/*": [
+        "types/*"
+      ],
+      "popup/*": [
+        "src/popup/*"
       ]
     },
     "lib": [
@@ -26,14 +33,14 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "types/**/*.ts",
+    "types/**/*.tsx"
   ],
   "exclude": [
     "node_modules"

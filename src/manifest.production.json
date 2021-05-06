@@ -1,0 +1,10 @@
+{
+    "manifest_version": 2,
+    "name": "test",
+    "description": "test",
+    "version": "0.0.1",
+    "options_page": "options.html",
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
+}
