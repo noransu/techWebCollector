@@ -24,8 +24,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { HISTORY_VIEW } from '@/utils/constant'
-import { setStorageItem } from '@/utils/chromeActions'
 
 export default defineComponent({
   components: {
@@ -41,14 +39,8 @@ export default defineComponent({
     }
   },
   emits: ['clickContent'],
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     function handleClickContent(item:LinkConfig):void {
-      const oldHistory = props.historyRecords || []
-      if (!oldHistory.some((key) => key.name === item.name)) {
-        const newHistory = [item].concat(oldHistory)
-        if (newHistory && newHistory.length > 6) newHistory.splice(-1)
-        setStorageItem(HISTORY_VIEW, JSON.stringify(newHistory))
-      }
       emit('clickContent', item)
     }
 

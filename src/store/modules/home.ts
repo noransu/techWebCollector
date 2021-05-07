@@ -1,15 +1,10 @@
 import { defineStore } from 'pinia'
+import { getBrowserTags } from '@/utils/chromeActions'
 
 interface HomeState {
   links: LinkConfig[],
   filteredLink: LinkConfig[],
-}
-
-interface LinkConfig {
-  name: string,
-  link?: string,
-  icon?: string,
-  child?: LinkConfig[],
+  selfTagList: LinkConfig[]
 }
 
 const linkSet: LinkConfig[] = [
@@ -750,23 +745,54 @@ export const useHomeStore = defineStore({
   id: 'app',
   state: (): HomeState => ({
     links: linkSet,
-    filteredLink: []
+    filteredLink: [],
+    selfTagList: []
   }),
   getters: {
     getFilteredLink() {
       return this.filteredLink
+    },
+    getSelfTagLink() {
+      return this.selfTagList
     },
     getFirstLevelLinks() {
       return this.links
     }
   },
   actions: {
+    transferTreeNode(arr: TreeNode[]): LinkConfig[] {
+      return arr.filter(key => key.url).map(item => {
+        return {
+          name: item.title,
+          link: item.url
+        }
+      })
+    },
+
+    async getBrowserTagsList() {
+      const tagArr = await getBrowserTags()
+      const tagListArr = [] as TreeNode[]
+      const flatLinks = (links: TreeNode[]) => {
+        links.forEach((link: TreeNode) => {
+          if (link.children && link.children.length > 0) {
+            flatLinks(link.children)
+          } else {
+            tagListArr.push(link)
+          }
+        })
+      }
+      flatLinks(tagArr as TreeNode[])
+
+      const transferResult = this.transferTreeNode(tagListArr)
+      this.selfTagList = [...transferResult]
+    },
+
     filterLinks(word: string) {
       if (!word) {
         this.filteredLink = []
         return
       }
-      const linkArr = [] as LinkConfig[]
+      let linkArr = [] as LinkConfig[]
       const allLinks = (links: LinkConfig[]) => {
         links.forEach((link: LinkConfig) => {
           if (link.child) {
@@ -778,6 +804,16 @@ export const useHomeStore = defineStore({
       }
 
       allLinks(this.links)
+
+      // 去重
+      const obj: { [key: string]: boolean; } = {}
+      linkArr = linkArr.concat(this.selfTagList).reduce((prev: LinkConfig[], current: LinkConfig) => {
+        if (!obj[current.link!]) {
+          prev.push(current)
+          obj[current.link!] = true
+        }
+        return prev
+      }, [])
 
       this.filteredLink = linkArr.filter((link) => {
         const modifyLink = link.name.toLocaleLowerCase()

@@ -32,6 +32,11 @@
         <div class="font-sans font-semibold mt-2 text-2xl px-4">Main Panel</div>
         <!-- card-body -->
         <div class="mt-2">
+          <div v-if="selfTagLinks && selfTagLinks.length > 0">
+            <card card-title="我的书签(总)"
+                  :card-child="selfTagLinks"
+                  @clickContent="clickContent" />
+          </div>
           <div v-for="item in levelOneLinks" :key="item.name">
             <card :card-title="item.name"
                   :card-child="item.child"
@@ -50,14 +55,14 @@
 
 <script lang="ts">
 import { Sticky } from 'vant'
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed, ref, onMounted } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useHomeStore } from '@/store/modules/home'
 import Popup from '@/components/Popup.vue'
 import Card from '@/components/Card.vue'
 import SearchPanel from '@/components/SearchPanel.vue'
 import { HISTORY_VIEW } from '@/utils/constant'
-import { tabAction, getStorageItem } from '@/utils/chromeActions'
+import { tabAction, getStorageItem, setStorageItem } from '@/utils/chromeActions'
 
 export default defineComponent({
   name: 'App',
@@ -71,9 +76,10 @@ export default defineComponent({
     const homeStore = useHomeStore()
     const levelOneLinks = computed(() => homeStore.getFirstLevelLinks)
     const filteredLinks = computed(() => homeStore.getFilteredLink)
+    const selfTagLinks = computed(() => homeStore.getSelfTagLink)
     const popupRef = ref<any>(null)
 
-    const historyRecord = ref([])
+    const historyRecord = ref([] as LinkConfig[])
     const isFocus = ref(false)
     const popupContent = ref([{
       name: ''
@@ -82,17 +88,25 @@ export default defineComponent({
 
     const debounceSearch = useDebounceFn(onInput, 300)
 
-    function onInput() {
-      homeStore.filterLinks(filterWord.value)
-    }
+    onMounted(() => {
+      homeStore.getBrowserTagsList()
+      getRecord()
+    })
 
-    async function focusInput() {
-      const record: any = await getStorageItem(HISTORY_VIEW)
+    async function getRecord() {
+      const record:any = await getStorageItem(HISTORY_VIEW)
       if (Object.keys(record).length === 0) {
         historyRecord.value = []
       } else {
         historyRecord.value = JSON.parse(record[HISTORY_VIEW])
       }
+    }
+
+    function onInput() {
+      homeStore.filterLinks(filterWord.value)
+    }
+
+    async function focusInput() {
       isFocus.value = true
     }
 
@@ -104,6 +118,12 @@ export default defineComponent({
 
     function clickContent(content: LinkConfig) {
       if (!content.child) {
+        const oldHistory = historyRecord.value || []
+        if (!oldHistory.some((key) => key.name === content.name)) {
+          const newHistory = [content].concat(oldHistory)
+          if (newHistory && newHistory.length > 6) newHistory.splice(-1)
+          setStorageItem(HISTORY_VIEW, JSON.stringify(newHistory))
+        }
         tabAction(content.link!)
         return
       }
@@ -112,6 +132,7 @@ export default defineComponent({
     }
 
     return {
+      selfTagLinks,
       levelOneLinks,
       clickContent,
       popupContent,

@@ -13,6 +13,18 @@ declare global {
     icon?: string,
     child?: LinkConfig[],
   }
+
+  interface TreeNode {
+    index?: number;
+    dateAdded?: number;
+    title: string;
+    url?: string;
+    dateGroupModified?: number;
+    id: string;
+    parentId?: string;
+    children?: TreeNode[];
+    unmodifiable?: any;
+  }
 }
 
 declare module 'vue' {

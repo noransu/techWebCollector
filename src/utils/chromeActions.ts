@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export function tabAction(link: string) {
+export function tabAction(link?: string) {
   chrome.tabs.query({
     active: true,
     status: 'complete',
@@ -16,6 +16,14 @@ export function tabAction(link: string) {
         message: 'JUMP_PAGE',
         url: link
       })
+    })
+  })
+}
+
+export function getBrowserTags() {
+  return new Promise(resolve => {
+    chrome.bookmarks.getTree(function (bookmarkArray) {
+      resolve(bookmarkArray)
     })
   })
 }

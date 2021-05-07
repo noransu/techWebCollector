@@ -20,9 +20,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://*/*",
-                "https://*/*",
-                "file://*"
+                "<all_urls>"
             ],
             "js": [
                 "js/content.js"
@@ -33,6 +31,7 @@
         }
     ],
     "permissions": [
+        "bookmarks",
         "tabs",
         "storage",
         "http://*/",
