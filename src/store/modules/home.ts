@@ -779,7 +779,10 @@ export const useHomeStore = defineStore({
 
       allLinks(this.links)
 
-      this.filteredLink = linkArr.filter((link) => link.name.includes(word))
+      this.filteredLink = linkArr.filter((link) => {
+        const modifyLink = link.name.toLocaleLowerCase()
+        return modifyLink.includes(word.toLocaleLowerCase())
+      })
     }
   }
 })
