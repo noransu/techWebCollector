@@ -37,7 +37,7 @@
 
    - 点击对应目录下的项目可以在当前的浏览器跳转到对应的网页（跟普通的书签没有区别 - -
 
-     ![](https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/usage.5r2j1aya8v80.gif)
+     ![](https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/use.1e4gtm55o0rk.gif)
 
   <br>
 
