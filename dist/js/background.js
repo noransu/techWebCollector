@@ -1,0 +1,1 @@
+(function(){"use strict";chrome.runtime.onMessage.addListener((async s=>{const{action:e,data:c}=s;chrome.storage.sync.set({[e]:c},(()=>{console.log("set successed!")}))}))})();

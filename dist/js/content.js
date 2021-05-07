@@ -1,0 +1,1 @@
+(function(){"use strict";chrome.runtime.onMessage.addListener((function(e){"JUMP_PAGE"===e.message&&(document.location.href=e.url)}))})();
