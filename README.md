@@ -57,7 +57,7 @@
 
 - 默认的调起插件热键是  `Alt + O`( windows系统: `Alt + O`，默认的热键为: `Ctrl + E`)
 - 在调起插件的情况下按下热键`Alt + F`( windows系统: `Alt + F`，默认的热键为: `Ctrl + Shift + F`)
-- 如果它与你的其他软件的热键冲突，你可以自己修改它： [安装后点这里进行修改](chrome://extensions/shortcuts)
+- 如果它与你的其他软件的热键冲突，你可以自己修改它：(在浏览器中键入该地址进行修改：chrome://extensions/shortcuts)
 
 ## 注意 | Cautions
 
