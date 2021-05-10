@@ -9,13 +9,16 @@
         "48": "logo.png",
         "64": "logo.png"
     },
-    "browser_action": {
+    "page_action": {
+        "default_icon": "logo.png",
+        "default_title": "TechWebCollector",
         "default_popup": "popup.html"
     },
     "background": {
         "scripts": [
             "js/background.js"
-        ]
+        ],
+        "persistent": false
     },
     "content_scripts": [
         {
@@ -34,6 +37,7 @@
         "bookmarks",
         "tabs",
         "storage",
+        "declarativeContent",
         "http://*/",
         "https://*/"
     ],
