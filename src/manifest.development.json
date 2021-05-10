@@ -41,5 +41,22 @@
         "http://*/",
         "https://*/"
     ],
+    "commands": {
+        "trigger-focus": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+F",
+                "windows": "Alt+F",
+                "mac": "Alt+F"
+            },
+            "description": "trigger focus action"
+        },
+        "_execute_page_action": {
+            "suggested_key": {
+                "default": "Ctrl+E",
+                "windows": "Alt+O",
+                "mac": "Alt+O"
+            }
+        }
+    },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
