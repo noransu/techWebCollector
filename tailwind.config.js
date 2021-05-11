@@ -4,8 +4,8 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
-       './src/**/*.vue',
-      './public/**/*.html',
+      './src/**/*.vue',
+      './public/**/*.html'
     ]
   },
   presets: [],
@@ -806,6 +806,9 @@ module.exports = {
       40: '40',
       50: '50'
     }
+  },
+  textOverflow: {
+    truncate: 'overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
   },
   variantOrder: [
     'first',

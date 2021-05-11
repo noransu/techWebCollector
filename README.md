@@ -53,7 +53,7 @@
 
   <br>
 
-### 热键映射 | Keymap
+## 热键映射 | Keymap
 
 - 默认的调起插件热键是  `Alt + O`( windows系统: `Alt + O`，默认的热键为: `Ctrl + E`)
 - 在调起插件的情况下按下热键`Alt + F`( windows系统: `Alt + F`，默认的热键为: `Ctrl + Shift + F`)

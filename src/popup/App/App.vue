@@ -28,6 +28,14 @@
     <transition name="fade">
       <div v-if="!isFocus"
       class="bg-white rounded-lg w-full h-full mt-3 shadow-md p-2 overflow-auto">
+    <!-- history part -->
+      <div v-if="historyRecord && historyRecord.length > 0" class="font-sans font-semibold mt-2 text-2xl px-4">History</div>
+      <div v-if="historyRecord && historyRecord.length > 0" class="p-3">
+        <div @click="clickContent(item)" class="cursor-pointer flex flex-wrap justify-start items-center mt-2 border-1 p-1 border-white rounded-full bg-gray-700" v-for="item in historyRecord" :key="item.name">
+          <img class="w-5 h-5 rounded-full mr-3 object-contain" :src="item.icon || 'https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/image.37s3g1ke2hs0.png'"/>
+          <span class="w-4/5 font-sans text-white font-semibold truncate" style="width: 80%">{{item.name}}</span>
+        </div>
+      </div>
         <!-- title -->
         <div class="font-sans font-semibold mt-2 text-2xl px-4">Main Panel</div>
         <!-- card-body -->
@@ -47,7 +55,6 @@
     </transition>
     <search-panel v-if="isFocus"
                   :filteredLinks="filteredLinks"
-                  :historyRecords="historyRecord"
                   @clickContent="clickContent" />
     <popup ref="popupRef" :popup-content="popupContent" @clickContent="clickContent" />
   </div>

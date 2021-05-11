@@ -7,7 +7,7 @@
       v-for="item in popupContent" :key="item.name">
         <img class="w-5 h-5 rounded-full mr-3 object-contain"
         :src="item.icon || 'https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/image.37s3g1ke2hs0.png'"/>
-        <span class="font-sans text-white font-semibold">{{item.name}}</span>
+        <span class="font-sans text-white font-semibold truncate" style="width: 80%">{{item.name}}</span>
       </div>
     </div>
   </van-popup>

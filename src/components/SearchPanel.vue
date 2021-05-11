@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white rounded-lg w-full h-11/12 mt-3 shadow-md p-2 overflow-hidden">
-    <!-- history part -->
-    <div v-if="historyRecords && historyRecords.length > 0" class="font-sans font-semibold mt-2 text-2xl px-4">History</div>
+    <!-- history part 2021-05-11 移到首页-->
+    <!-- <div v-if="historyRecords && historyRecords.length > 0" class="font-sans font-semibold mt-2 text-2xl px-4">History</div>
     <div v-if="historyRecords && historyRecords.length > 0" class="p-3">
       <div @click="handleClickContent(item)" class="cursor-pointer flex flex-wrap justify-start items-center mt-2 border-1 p-1 border-white rounded-full bg-gray-700" v-for="item in historyRecords" :key="item.name">
         <img class="w-5 h-5 rounded-full mr-3 object-contain" :src="item.icon || 'https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/image.37s3g1ke2hs0.png'"/>
-        <span class="font-sans text-white font-semibold">{{item.name}}</span>
+        <span class="w-4/5 font-sans text-white font-semibold truncate" style="width: 80%">{{item.name}}</span>
       </div>
-    </div>
+    </div> -->
     <!-- filter part -->
     <div>
       <div  class="font-sans font-semibold mt-2 text-2xl px-4">Filter Result</div>
@@ -15,7 +15,7 @@
       <div class="p-3 overflow-auto h-md">
         <div @click="handleClickContent(item)" class="cursor-pointer flex flex-wrap justify-start items-center mt-2 border-1 p-1 border-white rounded-full bg-gray-700" v-for="item in filteredLinks" :key="item.name">
           <img class="w-5 h-5 rounded-full mr-3 object-contain" :src="item.icon || 'https://cdn.jsdelivr.net/gh/noransu/images-myown@master/noransImage/image.37s3g1ke2hs0.png'"/>
-          <span class="font-sans text-white font-semibold">{{item.name}}</span>
+          <span class="w-4/5 font-sans text-white font-semibold truncate" style="width: 80%">{{item.name}}</span>
         </div>
       </div>
     </div>
@@ -32,11 +32,11 @@ export default defineComponent({
     filteredLinks: {
       type: Array as PropType<Array<LinkConfig>>,
       default: () => []
-    },
-    historyRecords: {
-      type: Array as PropType<Array<LinkConfig>>,
-      default: () => []
     }
+    // historyRecords: {
+    //   type: Array as PropType<Array<LinkConfig>>,
+    //   default: () => []
+    // }
   },
   emits: ['clickContent'],
   setup(_, { emit }) {
